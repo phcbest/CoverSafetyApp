@@ -18,4 +18,7 @@ public interface ApiCoverLog {
 
     @GET("work/coverlog/list")
     Observable<AllCoverLogBean> selectAllLog(@Query("limit") int limit, @Query("page") int page);
+
+    @POST("work/coverlog/delete")
+    Observable<Map<String, Object>> deleteLogById(@Body Integer[] ids);
 }

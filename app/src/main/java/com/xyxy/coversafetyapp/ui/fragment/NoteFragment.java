@@ -52,6 +52,12 @@ public class NoteFragment extends Fragment {
         bundle = savedInstanceState;
         //
         Observable<AllCoverLogBean> ob = apiCoverLog.selectAllLog(10, 1);
+        setAdapter(ob);
+
+        return view;
+    }
+
+    private void setAdapter(Observable<AllCoverLogBean> ob) {
         ob.subscribeOn(Schedulers.io())//子线程中进行http访问.
                 .observeOn(AndroidSchedulers.mainThread())//主线程中处理返回接口
                 .subscribe(new Observer<AllCoverLogBean>() {
@@ -67,7 +73,12 @@ public class NoteFragment extends Fragment {
                         Log.i(TAG, "onNext: " + new Gson().toJson(allCoverLogBean));
                         if (allCoverLogBean != null) {
                             mRvCoverLog.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
-                            mRvCoverLog.setAdapter(new RvLogAdapter(allCoverLogBean));
+                            mRvCoverLog.setAdapter(new RvLogAdapter(allCoverLogBean, new RvLogAdapter.UpdateAdapter() {
+                                @Override
+                                public void upAdapter() {
+                                    setAdapter(ob);
+                                }
+                            }));
                         }
                     }
 
@@ -81,8 +92,6 @@ public class NoteFragment extends Fragment {
 
                     }
                 });
-
-        return view;
     }
 
     private void initView(View view) {
