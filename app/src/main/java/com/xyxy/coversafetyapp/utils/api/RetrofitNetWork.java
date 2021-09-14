@@ -14,10 +14,14 @@ public class RetrofitNetWork {
         return initRetrofit().create(ApiCoverLog.class);
     }
 
+    public static ApiCoverError getApiCoverError() {
+        return initRetrofit().create(ApiCoverError.class);
+    }
+
     private static Retrofit initRetrofit() {
 
         return new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:23333/")//119.3.40.236
+                .baseUrl("http://119.3.40.236:23333/")//119.3.40.236
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .build();

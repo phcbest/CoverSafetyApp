@@ -35,7 +35,7 @@ public class CoverErrorEntity implements Serializable {
     /**
      * 错误的时间
      */
-    private Integer errorTime;
+    private Long errorTime;
     /**
      * 错误的图片
      */
@@ -44,6 +44,11 @@ public class CoverErrorEntity implements Serializable {
      * 该条错误的状态，用于逻辑删除
      */
     private Integer errorStatus;
+
+    /**
+     * 错误的等级，1-5 ，数字越大等级越高
+     */
+    private Integer errorLevel;
 
     @Override
     public String toString() {
@@ -56,6 +61,7 @@ public class CoverErrorEntity implements Serializable {
                 ", errorTime=" + errorTime +
                 ", errorImage='" + errorImage + '\'' +
                 ", errorStatus=" + errorStatus +
+                ", errorLevel=" + errorLevel +
                 '}';
     }
 
@@ -103,11 +109,11 @@ public class CoverErrorEntity implements Serializable {
         this.errorDepict = errorDepict;
     }
 
-    public Integer getErrorTime() {
+    public Long getErrorTime() {
         return errorTime;
     }
 
-    public void setErrorTime(Integer errorTime) {
+    public void setErrorTime(Long errorTime) {
         this.errorTime = errorTime;
     }
 
@@ -125,5 +131,13 @@ public class CoverErrorEntity implements Serializable {
 
     public void setErrorStatus(Integer errorStatus) {
         this.errorStatus = errorStatus;
+    }
+
+    public Integer getErrorLevel() {
+        return errorLevel;
+    }
+
+    public void setErrorLevel(Integer errorLevel) {
+        this.errorLevel = errorLevel;
     }
 }
