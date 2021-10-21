@@ -24,7 +24,7 @@ public class RvLogErrorAdapter extends RecyclerView.Adapter<RvLogErrorAdapter.Vi
     }
 
     public interface SyncAdapter {
-        void sync();
+        void sync(GetAllCoverErrorBean.PageBean.RecordsBean recordsBean);
     }
 
     @NonNull
@@ -58,7 +58,7 @@ public class RvLogErrorAdapter extends RecyclerView.Adapter<RvLogErrorAdapter.Vi
         holder.mTvErrorInfo.setText(String.format("井盖UID:%s\n错误等级:%d\n报错原因:%s"
                 , recordsBean.getCoverUid(), recordsBean.getErrorLevel(), recordsBean.getErrorDepict()));
 
-        holder.mTvErrorInfo.setOnClickListener(v -> syncAdapter.sync());
+        holder.mTvErrorInfo.setOnClickListener(v -> syncAdapter.sync(recordsBean));
 
     }
 
